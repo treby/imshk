@@ -26,8 +26,15 @@ class KonominBotExecutor
   end
 
   def message_from_konomin
-    ['お疲れ様、プロデューサー',
-     'seedファイルを更新しておいたわよ']
+    ["Seed update #{time_stamp}",
+     "お疲れ様、プロデューサー\n" + message_body]
+  end
+
+  def message_body
+    ['疲れてる子がいないかちゃんと見ててよ？',
+     'みんな、合言葉はセクシーよ！',
+     '最後はなんとかしてあげるから、思い切って頑張りなさーい♪'
+    ].sample(1).first
   end
 
   def git_agent
