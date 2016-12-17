@@ -9,7 +9,7 @@ git_email = 'mlborder@atelier-nodoka.net'
 g = Git.clone(repo, '', path: target_dir)
 g.config('user.name', git_name)
 g.config('user.email', git_email)
-branch_name = 'by-konomin-assistant-2'
+branch_name = "update-seed-#{Time.now.strftime('%F-%H-%M')}"
 g.branch(branch_name).checkout
 
 `heroku run --app mlborder rails runner 'ActiveRecord::Base.logger = nil; puts Event.dump_seeds' | nkf -Lu > #{target_dir}/db/seeds.rb`
