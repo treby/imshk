@@ -15,7 +15,7 @@ g.branch(branch_name).checkout
 `heroku run --app mlborder rails runner 'ActiveRecord::Base.logger = nil; puts Event.dump_seeds' | nkf -Lu > #{target_dir}/db/seeds.rb`
 g.add
 g.commit('Update db/seeds.rb')
-g.push
+g.push('origin', branch_name)
 
 #cli = Octokit::Client.new(login: ENV['KONOMIN_USERNAME'], password: ENV['KONOMIN_PASSWORD'])
 #p Octokit.user
