@@ -9,7 +9,7 @@ git_email = 'mlborder@atelier-nodoka.net'
 g = Git.clone(repo, '', path: target_dir)
 g.config('user.name', git_name)
 g.config('user.email', git_email)
-branch_name = 'by-konomin-assistant'
+branch_name = 'by-konomin-assistant-2'
 g.branch(branch_name).checkout
 
 `heroku run --app mlborder rails runner 'ActiveRecord::Base.logger = nil; puts Event.dump_seeds' | nkf -Lu > #{target_dir}/db/seeds.rb`
@@ -17,5 +17,6 @@ g.add
 g.commit('Update db/seeds.rb')
 g.push('origin', branch_name)
 
-#cli = Octokit::Client.new(login: ENV['KONOMIN_USERNAME'], password: ENV['KONOMIN_PASSWORD'])
-#p Octokit.user
+cli = Octokit::Client.new(login: ENV['KONOMIN_USERNAME'], password: ENV['KONOMIN_PASSWORD'])
+cli.login
+cli.create_pull_request 'treby/mlborder', 'master', branch_name, 'お疲れ様、プロデューサー', 'seedファイルを更新しておいたわよ'
