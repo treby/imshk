@@ -2,7 +2,7 @@ require 'octokit'
 require 'git'
 
 class KonominBotExecutor
-  TARGET_REPOSITORY = 'treby/mlborder'
+  TARGET_REPOSITORY = 'mlborder/mlborder.com'
   TARGET_DIR = 'mlborder'
   GIT_USER_NAME = 'konomin-bot'
   GIT_USER_EMAIL = 'mlborder@atelier-nodoka.net'
