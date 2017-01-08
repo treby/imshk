@@ -8,6 +8,15 @@ class KonominBotExecutor
   GIT_USER_EMAIL = 'mlborder@atelier-nodoka.net'
 
   def execute
+    git_agent = if Dir.exists?(TARGET_DIR)
+                  Git.open(TARGET_DIR).tap do |g|
+                    g.checkout('master')
+                    g.pull
+                  end
+                else
+                  Git.clone("git@github.com:#{TARGET_REPOSITORY}.git", '', path: TARGET_DIR)
+                end
+
     git_agent.tap do |g|
       g.config('user.name', GIT_USER_NAME)
       g.config('user.email', GIT_USER_EMAIL)
@@ -35,10 +44,6 @@ class KonominBotExecutor
      'みんな、合言葉はセクシーよ！',
      '最後はなんとかしてあげるから、思い切って頑張りなさーい♪'
     ].sample(1).first
-  end
-
-  def git_agent
-    @git_agent ||= Git.clone("git@github.com:#{TARGET_REPOSITORY}.git", '', path: TARGET_DIR)
   end
 
   def github_agent
